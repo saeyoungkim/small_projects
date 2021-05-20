@@ -44,7 +44,6 @@ case class ServerMutex(
 
     reader.close
     writer.close
-    sock.close
   }
 
   def listenAndServe(): Unit = {
@@ -56,10 +55,12 @@ case class ServerMutex(
 
       f.onComplete {
         case Success(_) => {
-          println("serve done")
+          println("success")
+          sock.close
         }
         case Failure(_) => {
           println("failure callback called...")
+          sock.close
           futureSeq.foreach(Await.result(_, Duration.Inf))
           throw new RuntimeException("cannot serve correctly.")
         }
@@ -70,10 +71,10 @@ case class ServerMutex(
   private def redirect(request: HttpRequest, pw: PrintWriter): Unit = {
     ServerMutex.pathMap.get(request.requestURI) match {
       case Some(path) => {
-        println(s"send redirect response.)\n${HttpResponse.result(request.requestVersion, path)}")
-        pw.write(HttpResponse.result(request.requestVersion, path))
+        println(s"send redirect following response.${HttpResponse.redirectResult(request.requestVersion, path)}")
+        pw.println(HttpResponse.redirectResult(request.requestVersion, path))
       }
-      case None => pw.write("hi")
+      case None => pw.println(HttpResponse.result(request.requestVersion, request.requestURI, s"${request.requestURI} cannot be redirected"))
     }
   }
 }
