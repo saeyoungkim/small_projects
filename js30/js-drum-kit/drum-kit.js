@@ -9,18 +9,17 @@ const keyIndexMap = {
     'k': 7
 };
 
-const instruments = document.getElementsByClassName('instrument')
+const instruments = document.getElementsByClassName('instrument');
+const audios = Array.from(instruments).map(elem => new Audio(`./audios/${elem.dataset['key']}.wav`));
 
 const twinkleAndPlayOnce = (ch) => {
     const i = keyIndexMap[ch];
 
-    const audio = new Audio(`./audios/${instruments[i].dataset['key']}.wav`)
-
-    instruments[i].classList.add('clicked')
-    audio.play();
+    instruments[i].classList.add('clicked');
+    audios[i].currentTime = 0;
+    audios[i].play();
     setTimeout(() => {
         instruments[i].classList.remove('clicked');
-        audio.remove();
     }, 50);
 }
 
