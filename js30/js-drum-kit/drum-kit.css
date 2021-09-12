@@ -24,8 +24,7 @@
     margin-left: 10px;
     margin-right: 10px;
     flex-direction: column;
-    transition: width 50ms;
-    transition: height 50ms;
+    transition: all 0.08s;
 }
 
 p.key-name {
@@ -47,6 +46,8 @@ p.instrument-name {
     margin-right: 0px;
 }
 
-.clicked {
+.playing {
+    transform: scale(1.5);
     border: 3px solid #ffa000;
+
 }

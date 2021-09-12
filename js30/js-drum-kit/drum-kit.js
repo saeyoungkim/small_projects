@@ -15,12 +15,12 @@ const audios = Array.from(instruments).map(elem => new Audio(`./audios/${elem.da
 const twinkleAndPlayOnce = (ch) => {
     const i = keyIndexMap[ch];
 
-    instruments[i].classList.add('clicked');
+    instruments[i].classList.add('playing');
     audios[i].currentTime = 0;
     audios[i].play();
     setTimeout(() => {
-        instruments[i].classList.remove('clicked');
-    }, 50);
+        instruments[i].classList.remove('playing');
+    }, 80);
 }
 
 document.addEventListener('keypress', (e) => {
