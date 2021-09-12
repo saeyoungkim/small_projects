@@ -49,5 +49,4 @@ p.instrument-name {
 .playing {
     transform: scale(1.5);
     border: 3px solid #ffa000;
-
 }

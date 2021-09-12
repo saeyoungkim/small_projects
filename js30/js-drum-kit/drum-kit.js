@@ -9,8 +9,19 @@ const keyIndexMap = {
     'k': 7
 };
 
-const instruments = document.getElementsByClassName('instrument');
+const instruments = document.querySelectorAll('.instrument');
 const audios = Array.from(instruments).map(elem => new Audio(`./audios/${elem.dataset['key']}.wav`));
+
+const removeTransition = e => {
+    if(e.propertyName !== 'transform') {
+        return ;
+    }
+
+    // this means the caller of event listener
+    e.srcElement.classList.remove('playing');
+}
+
+instruments.forEach(elem => elem.addEventListener('transitionend', removeTransition));
 
 const twinkleAndPlayOnce = (ch) => {
     const i = keyIndexMap[ch];
@@ -18,9 +29,6 @@ const twinkleAndPlayOnce = (ch) => {
     instruments[i].classList.add('playing');
     audios[i].currentTime = 0;
     audios[i].play();
-    setTimeout(() => {
-        instruments[i].classList.remove('playing');
-    }, 80);
 }
 
 document.addEventListener('keypress', (e) => {
