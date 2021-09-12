@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Azeret Mono', monospace;
+}
+
+#drum-container {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.instrument {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #2f2f2f;
+    margin-left: 10px;
+    margin-right: 10px;
+    flex-direction: column;
+    transition: width 50ms;
+    transition: height 50ms;
+}
+
+p.key-name {
+    font-size: 35px;
+    margin: auto;
+}
+
+p.instrument-name {
+    display: block;
+    font-size: 10px;
+    margin: auto;
+}
+
+.instrument:first-child {
+    margin-left: 0px;
+}
+
+.instrument:last-child {
+    margin-right: 0px;
+}
+
+.clicked {
+    border: 3px solid #ffa000;
+}
