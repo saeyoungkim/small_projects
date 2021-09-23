@@ -53,7 +53,7 @@ func searchWord(wg *sync.WaitGroup, file *os.File, word string, ch chan []string
 		if !isPrefix {
 			// insert string
 			if strings.Contains(tmp, word) {
-				ret = append(ret, fmt.Sprintf("'%12s'    %s", strconv.Itoa(row), tmp))
+				ret = append(ret, fmt.Sprintf("%12s    %s", strconv.Itoa(row), tmp))
 			}
 			// increment row number
 			tmp = ""
